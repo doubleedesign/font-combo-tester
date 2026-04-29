@@ -7,12 +7,14 @@ import {
 import { PreviewPanelInput, PreviewPanelToolbar, PreviewPanelWrapper } from './PreviewPanel.styled.ts';
 import { useState } from 'react';
 import PreviewContent from '../PreviewContent/PreviewContent.tsx';
+import { StyledButton } from '../common.ts';
 
 export const PreviewPanel = () => {
 	const sizes = ['sm', 'base', 'md', 'lg', 'xl', 'xxl', 'display'];
 	const families = ['body', 'headings', 'accent'];
-	const [size, setSize] = useState('xl');
+	const [size, setSize] = useState('md');
 	const [family, setFamily] = useState(['body', 'accent']);
+	const [zoom, setZoom] = useState(200);
 
 	const sizeOptions = sizes.map((size) => ({ id: size, name: size }));
 
@@ -49,9 +51,31 @@ export const PreviewPanel = () => {
 						))}
 					</CheckboxGroup>
 				</PreviewPanelInput>
+
+				<PreviewPanelInput>
+					<div className="range-selector">
+						<Label htmlFor="zoom">Zoom</Label>
+						<input
+							id="zoom"
+							type="range"
+							min="50"
+							max="300"
+							value={zoom}
+							onChange={(e) => setZoom(Number(e.target.value))}
+						/>
+						<span>{zoom}%</span>
+						<StyledButton aria-label="Reset preview zoom to 100%" styleType="subtle" onClick={() => setZoom(100)} aria-selected={zoom === 100}>
+							100%
+						</StyledButton>
+						<StyledButton aria-label="Reset preview zoom to 200%" styleType="subtle" onClick={() => setZoom(200)} aria-selected={zoom === 200}>
+							200%
+						</StyledButton>
+					</div>
+				</PreviewPanelInput>
+
 			</PreviewPanelToolbar>
 
-			<PreviewContent size={size} families={family} />
+			<PreviewContent zoomLevel={zoom} size={size} families={family} />
 
 		</PreviewPanelWrapper>
 	);

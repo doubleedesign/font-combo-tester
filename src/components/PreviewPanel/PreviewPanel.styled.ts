@@ -6,20 +6,23 @@ export const PreviewPanelWrapper = styled.div`
 
 export const PreviewPanelToolbar = styled(Toolbar)`
 	justify-content: flex-end;
+	gap: 0;
 `;
 
 export const PreviewPanelInput = styled.div`
 	display: flex;
 	gap: var(--spacing-xxs);
 	align-items: flex-end;
-    padding: var(--spacing-xs) var(--spacing-sm);        
+    padding: var(--spacing-xs) var(--spacing-lg);
+	margin-block: var(--spacing-xs);
 	height: 100%;
     box-sizing: border-box;
     width: fit-content;
-	margin-inline-start: var(--spacing-xl);
+	border-left: 1px solid color-mix(in srgb, var(--color-body-text-muted) 25%, white);
 	
     .react-aria-CheckboxGroup,
-    .react-aria-RadioGroup {
+    .react-aria-RadioGroup,
+	.range-selector {
         font-family: var(--font-family-labels);
         display: flex;
 		align-items: center;
@@ -38,7 +41,8 @@ export const PreviewPanelInput = styled.div`
         line-height: 1;
     }
 		
-	.react-aria-Radio {
+	.react-aria-Radio,
+	.range-selector button {
 		padding-inline: var(--spacing-md);
 		line-height: 1;
 		background: var(--color-light-muted);
@@ -92,4 +96,34 @@ export const PreviewPanelInput = styled.div`
         }
 	}
 	
+	.range-selector {
+        gap: var(--spacing-xxs);
+		
+		input[type="range"] {
+			margin: 0;
+			cursor: pointer;
+			accent-color: var(--color-body-text-muted);
+			transition: all 0.3s ease;
+
+            + span {
+				display: inline-block;
+				width: 36px; // stop it making the UI jump around with different digits
+                font: var(--font-captions);
+                color: var(--color-body-text);
+            }
+			
+			&:hover, &:focus {
+				accent-color: var(--color-primary);
+			}
+        }
+		
+		button {
+			padding: var(--spacing-xs) var(--spacing-sm);
+			
+			&[aria-selected="true"] {
+				background: var(--color-primary);
+				color: contrast-color(var(--color-primary));
+			}
+		}
+	}
 `;
