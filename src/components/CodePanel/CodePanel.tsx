@@ -11,6 +11,7 @@ interface CodePanelProps {
 
 export const CodePanel: FC<CodePanelProps> = ( { fileType }) => {
 	const { css, setCss } = useCss(fileType);
+	// TODO: Add reset button
 
 	return (
 		<CodePanelWrapper>

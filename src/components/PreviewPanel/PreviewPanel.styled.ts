@@ -8,73 +8,89 @@ export const PreviewPanelToolbar = styled(Toolbar)`
 	justify-content: flex-end;
 `;
 
-export const PreviewPanelSelect = styled.div`
+export const PreviewPanelInput = styled.div`
 	display: flex;
 	gap: var(--spacing-xxs);
-	align-items: center;
-    padding: var(--spacing-xs) var(--spacing-sm);
-
-    .react-aria-Select {
+	align-items: flex-end;
+    padding: var(--spacing-xs) var(--spacing-sm);        
+	height: 100%;
+    box-sizing: border-box;
+    width: fit-content;
+	margin-inline-start: var(--spacing-xl);
+	
+    .react-aria-CheckboxGroup,
+    .react-aria-RadioGroup {
         font-family: var(--font-family-labels);
         display: flex;
-        gap: var(--spacing-xs);
 		align-items: center;
+		flex-wrap: wrap;
+        gap: var(--spacing-sm);
 
         .react-aria-Label {
             font-weight: var(--font-weight-medium);
             color: var(--color-body-text-muted);
         }
+    }
+
+    .react-aria-Radio,
+    .react-aria-Checkbox {
+        padding-block: var(--spacing-xs);
+        line-height: 1;
+    }
 		
-        .react-aria-Button {
-			width: 120px;
-			flex-basis: 120px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-family: var(--font-family-labels);
-            font-size: var(--font-size-base);
-            border: 0;
-            border-radius: 0.25rem;
-            padding: var(--spacing-xs);
-            background: var(--color-light);
-
-            &:after {
-                content: '▼';
-                font-size: 0.65em;
-            }
-        }
-    }
-	
-	.react-aria-Popover {
-		transform: translateY(-0.5rem);
+	.react-aria-Radio {
+		padding-inline: var(--spacing-md);
+		line-height: 1;
+		background: var(--color-light-muted);
+		color: var(--color-body-text-muted);
+		border-radius: 1rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		
+		&[data-selected="true"] {
+			background: var(--color-primary);
+			color: contrast-color(var(--color-primary));
+		}
+		
+		&:not([data-selected="true"]):hover,
+		&:not([data-selected="true"]):focus {
+			background: var(--color-light);
+			color: var(--color-body-text);
+		}
 	}
+	
+	.react-aria-Checkbox {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-xxs);
+		color: var(--color-body-text-muted);
+		cursor: pointer;
+		
+		.checkbox {
+			display: block;
+			width: 1rem;
+			height: 1rem;
+			border: 1px solid var(--color-body-text-muted);
+			border-radius: 4px;
+			padding: 2px;
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 
-    .react-aria-ListBox {
-		width: 120px;
-		background: var(--color-light);
-		border-bottom-left-radius: 0.25rem;
-		border-bottom-right-radius: 0.25rem;
-
-        .react-aria-ListBoxItem {
-            font: var(--font-labels);
-			font-size: var(--font-size-base);
-			font-weight: var(--font-weight-light);
-            cursor: pointer;
-			text-align: start;
-			padding: var(--spacing-xxs) var(--spacing-xs);
+        &[data-selected="true"] {
+            color: var(--color-body-text);
 			
-			&:hover, &:focus {
+			.checkbox {
+				border-color: var(--color-primary);
 				background: var(--color-primary);
-				color: contrast-color(var(--color-primary));
-				border: 0;
-				outline: none;
+				
+                svg {
+                    fill: contrast-color(var(--color-primary));
+                }
 			}
-			
-			&[data-hovered="true"] {
-				border: 0;
-				outline: none;
-            }
         }
-    }
+	}
+	
 `;
