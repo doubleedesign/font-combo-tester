@@ -18,7 +18,7 @@ export const CodePanelGroup: FC<CodePanelGroupProps> = () => {
 	return (
 		<CodePanelGroupWrapper>
 			<SharedElementTransition>
-				<Tabs defaultSelectedKey="styles">
+				<Tabs defaultSelectedKey="fonts">
 					<Toolbar>
 						<TabList aria-label="CSS Files">
 							<Tab id="fonts">Fonts</Tab>
