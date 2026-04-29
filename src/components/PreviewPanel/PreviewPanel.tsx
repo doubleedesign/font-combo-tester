@@ -8,6 +8,7 @@ import { PreviewPanelInput, PreviewPanelToolbar, PreviewPanelWrapper } from './P
 import { useState } from 'react';
 import PreviewContent from '../PreviewContent/PreviewContent.tsx';
 import { StyledButton } from '../common.ts';
+import InfoBox from '../InfoBox/InfoBox.tsx';
 
 export const PreviewPanel = () => {
 	const sizes = ['sm', 'base', 'md', 'lg', 'xl', 'xxl', 'display'];
@@ -76,6 +77,12 @@ export const PreviewPanel = () => {
 			</PreviewPanelToolbar>
 
 			<PreviewContent zoomLevel={zoom} size={size} families={family} />
+
+			<InfoBox>
+				<p>This preview shows selected metrics for the given body font (not yet configurable - changing it in the CSS won't change the metrics).</p>
+				{/* eslint-disable-next-line max-len */}
+				<p>Overlaying the heading and/or accent font can be used as a visual guide to assist with making styling adjustments when fonts appear physically larger or smaller than the body font at the same size.</p>
+			</InfoBox>
 
 		</PreviewPanelWrapper>
 	);
