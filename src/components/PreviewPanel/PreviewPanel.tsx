@@ -64,10 +64,10 @@ export const PreviewPanel = () => {
 							onChange={(e) => setZoom(Number(e.target.value))}
 						/>
 						<span>{zoom}%</span>
-						<StyledButton aria-label="Reset preview zoom to 100%" styleType="subtle" onClick={() => setZoom(100)} aria-selected={zoom === 100}>
+						<StyledButton aria-label="Reset preview zoom to 100%" $styleType="subtle" onClick={() => setZoom(100)} aria-selected={zoom === 100}>
 							100%
 						</StyledButton>
-						<StyledButton aria-label="Reset preview zoom to 200%" styleType="subtle" onClick={() => setZoom(200)} aria-selected={zoom === 200}>
+						<StyledButton aria-label="Reset preview zoom to 200%" $styleType="subtle" onClick={() => setZoom(200)} aria-selected={zoom === 200}>
 							200%
 						</StyledButton>
 					</div>

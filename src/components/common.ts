@@ -14,9 +14,9 @@ export const Toolbar = styled.div`
 	padding-inline: 0.5rem;
 `;
 
-export const StyledButton = styled.button<{ styleType?: 'solid' | 'outline' | 'subtle' }>`
-    background: ${props => props.styleType === 'solid' ? 'var(--color-primary)' : 'none'};
-	border: ${props => props.styleType === 'outline' ? '1px solid var(--color-body-text-muted)' : '0'};
+export const StyledButton = styled.button<{ $styleType?: 'solid' | 'outline' | 'subtle' }>`
+    background: ${props => props.$styleType === 'solid' ? 'var(--color-primary)' : 'none'};
+	border: ${props => props.$styleType === 'outline' ? '1px solid var(--color-body-text-muted)' : '0'};
 	padding: var(--spacing-sm);
 	box-sizing: border-box;
 	cursor: pointer;
@@ -27,9 +27,9 @@ export const StyledButton = styled.button<{ styleType?: 'solid' | 'outline' | 's
     font-family: var(--font-family-accent);
 
 	&:hover, &:focus {
-		background: ${props => props.styleType === 'subtle' ? 'var(--color-light)' : ''};
-		border: ${props => props.styleType === 'outline' ? 'var(--color-primary' : ''};
-		color: ${props => props.styleType === 'outline' ? 'var(--color-primary)' : ''};
+		background: ${props => props.$styleType === 'subtle' ? 'var(--color-light)' : ''};
+		border: ${props => props.$styleType === 'outline' ? 'var(--color-primary' : ''};
+		color: ${props => props.$styleType === 'outline' ? 'var(--color-primary)' : ''};
 	}
 	
 	svg {
