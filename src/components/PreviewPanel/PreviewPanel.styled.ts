@@ -70,6 +70,10 @@ export const PreviewPanelInput = styled.div`
 		color: var(--color-body-text-muted);
 		cursor: pointer;
 		
+		&[data-readonly="true"] {
+            cursor: not-allowed;
+        }
+		
 		.checkbox {
 			width: 1rem;
 			height: 1rem;

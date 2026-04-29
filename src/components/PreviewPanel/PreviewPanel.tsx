@@ -37,7 +37,7 @@ export const PreviewPanel = () => {
 					<CheckboxGroup value={family} onChange={setFamily}>
 						<Label>Families</Label>
 						{families.map((family) => (
-							<Checkbox key={family} value={family}>
+							<Checkbox key={family} value={family} isReadOnly={family === 'body'}>
 								{({ isSelected }) => (
 									<>
 										{/* eslint-disable-next-line max-len */}

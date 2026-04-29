@@ -18,7 +18,7 @@ const PreviewContent: FC<PreviewContentProps> = ({ size, families, zoomLevel = 1
 		<ShadowDomWrapper stylesheetContent={`${fonts}\n${tokens}\n${styles}`}>
 			<PreviewContentWrapper $zoomLevel={zoomLevel}>
 				{families.map((family) => (
-					<PreviewContentItem key={family} $size={size} $family={family}>
+					<PreviewContentItem key={family} $size={size} $family={family} data-family={family}>
 						<span>The quick brown fox jumps over the lazy dog</span>
 					</PreviewContentItem>
 				))}
