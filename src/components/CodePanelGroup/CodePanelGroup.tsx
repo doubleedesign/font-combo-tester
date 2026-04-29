@@ -10,6 +10,7 @@ import {
 } from 'react-aria-components/Tabs';
 import { CodePanel } from '../CodePanel/CodePanel.tsx';
 import { SharedElementTransition } from 'react-aria-components';
+import { Toolbar } from '../common.ts';
 
 type CodePanelGroupProps = {};
 
@@ -18,12 +19,14 @@ export const CodePanelGroup: FC<CodePanelGroupProps> = () => {
 		<CodePanelGroupWrapper>
 			<SharedElementTransition>
 				<Tabs defaultSelectedKey="styles">
-					<TabList aria-label="CSS Files">
-						<Tab id="fonts">Fonts</Tab>
-						<Tab id="tokens">Tokens</Tab>
-						<Tab id="styles">Styles</Tab>
-						<SelectionIndicator />
-					</TabList>
+					<Toolbar>
+						<TabList aria-label="CSS Files">
+							<Tab id="fonts">Fonts</Tab>
+							<Tab id="tokens">Tokens</Tab>
+							<Tab id="styles">Styles</Tab>
+							<SelectionIndicator />
+						</TabList>
+					</Toolbar>
 					<TabPanels>
 						<TabPanel id="fonts">
 							<CodePanel fileType="fonts" />
