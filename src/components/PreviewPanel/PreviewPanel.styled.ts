@@ -67,7 +67,6 @@ export const PreviewPanelInput = styled.div`
 		cursor: pointer;
 		
 		.checkbox {
-			display: block;
 			width: 1rem;
 			height: 1rem;
 			border: 1px solid var(--color-body-text-muted);
