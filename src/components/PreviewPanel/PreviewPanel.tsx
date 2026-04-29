@@ -6,7 +6,7 @@ import {
 } from 'react-aria-components';
 import { PreviewPanelInput, PreviewPanelToolbar, PreviewPanelWrapper } from './PreviewPanel.styled.ts';
 import { useState } from 'react';
-import PreviewContent from '../PreviewContent/PreviewContent.tsx';
+import { PreviewContent } from '../PreviewContent/PreviewContent.tsx';
 import { StyledButton } from '../common.ts';
 import InfoBox from '../InfoBox/InfoBox.tsx';
 
@@ -14,7 +14,7 @@ export const PreviewPanel = () => {
 	const sizes = ['sm', 'base', 'md', 'lg', 'xl', 'xxl', 'display'];
 	const families = ['body', 'headings', 'accent'];
 	const [size, setSize] = useState('md');
-	const [family, setFamily] = useState(['body', 'accent']);
+	const [family, setFamily] = useState(['body']);
 	const [zoom, setZoom] = useState(200);
 
 	const sizeOptions = sizes.map((size) => ({ id: size, name: size }));

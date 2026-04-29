@@ -25,12 +25,13 @@ export const ShadowDomWrapper: FC<ShadowDomWrapperProps> = ({ stylesheetContent,
 			return;
 		}
 
-		let customStyleEl = shadowRoot.querySelector('style[data-custom]');
+		let customStyleEl = shadowRoot.querySelector('style[data-custom="doubleedesign"]');
 		if (!customStyleEl) {
 			customStyleEl = document.createElement('style');
-			customStyleEl.setAttribute('data-custom', '');
+			customStyleEl.setAttribute('data-custom', 'doubleedesign');
 			shadowRoot.appendChild(customStyleEl);
 		}
+
 		customStyleEl.textContent = stylesheetContent;
 	}, [stylesheetContent, shadowRoot]);
 

@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@doubleedesign/doublee-site-style": "link:../doublee-site-style",
 		"@srsholmes/react-code-input": "^0.0.5",
+		"lib-font": "^3.0.1",
 		"prismjs": "^1.30.0",
 		"react": "^19.2.5",
 		"react-aria-components": "^1.17.0",
