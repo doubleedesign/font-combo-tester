@@ -19,6 +19,7 @@ export const PreviewPanelInput = styled.div`
     box-sizing: border-box;
     width: fit-content;
 	border-left: 1px solid color-mix(in srgb, var(--color-body-text-muted) 25%, white);
+	font-family: var(--font-family-accent);
 	
     .react-aria-CheckboxGroup,
     .react-aria-RadioGroup,

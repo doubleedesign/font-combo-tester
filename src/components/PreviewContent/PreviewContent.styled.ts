@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 export const PreviewContentWrapper = styled.div`
-	padding: var(--spacing-xl);
+	padding: var(--spacing-lg) var(--spacing-xl);
 	position: relative;
 `;
 
-export const PreviewContentItem = styled.div<{ $size: string; $family: string, $zoomLevel: number }>`
+export const PreviewContentItem = styled.div<{ $size: string; $family: string, $weight: string, $zoomLevel: number }>`
 	margin: 0;
 	font-family: ${props => `var(--font-family-${props.$family})`};
 	font-size: ${props => `var(--font-size-${props.$size})`};
+	font-weight: ${props => `var(--font-weight-${props.$weight})`};
 	position: absolute;
 	top: var(--spacing-xl);
 	left: var(--spacing-xl);

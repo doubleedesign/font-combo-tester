@@ -15,6 +15,7 @@ export const PreviewPanel = () => {
 	const families = ['body', 'headings', 'accent'];
 	const [size, setSize] = useState('md');
 	const [family, setFamily] = useState(['body']);
+	const [showMetrics, setShowMetrics] = useState(true);
 	const [zoom, setZoom] = useState(200);
 
 	const sizeOptions = sizes.map((size) => ({ id: size, name: size }));
@@ -54,6 +55,20 @@ export const PreviewPanel = () => {
 				</PreviewPanelInput>
 
 				<PreviewPanelInput>
+					<Checkbox key="metrics" value="showMetrics" isSelected={showMetrics} onChange={(value) => setShowMetrics(value)}>
+						{({ isSelected }) => (
+							<>
+								{/* eslint-disable-next-line max-len */}
+								{ /* <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--> */}
+								{/* eslint-disable-next-line max-len */}
+								<span className="checkbox">{isSelected ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg> : ''}</span>
+								<span>Show body font metrics</span>
+							</>
+						)}
+					</Checkbox>
+				</PreviewPanelInput>
+
+				<PreviewPanelInput>
 					<div className="range-selector">
 						<Label htmlFor="zoom">Zoom</Label>
 						<input
@@ -76,12 +91,18 @@ export const PreviewPanel = () => {
 
 			</PreviewPanelToolbar>
 
-			<PreviewContent zoomLevel={zoom} size={size} families={family} />
+			<PreviewContent zoomLevel={zoom} size={size} families={family} showMetrics={showMetrics} weight="light" />
+			<PreviewContent zoomLevel={zoom} size={size} families={family} showMetrics={showMetrics} weight="normal" />
+			<PreviewContent zoomLevel={zoom} size={size} families={family} showMetrics={showMetrics} weight="medium" />
+			<PreviewContent zoomLevel={zoom} size={size} families={family} showMetrics={showMetrics} weight="semibold" />
+			<PreviewContent zoomLevel={zoom} size={size} families={family} showMetrics={showMetrics} weight="bold" />
 
 			<InfoBox>
-				<p>This preview shows selected metrics for the given body font (not yet configurable - changing it in the CSS won't change the metrics).</p>
-				{/* eslint-disable-next-line max-len */}
-				<p>Overlaying the heading and/or accent font can be used as a visual guide to assist with making styling adjustments when fonts appear physically larger or smaller than the body font at the same size.</p>
+				{/* eslint-disable max-len */}
+				<p>This preview shows selected metrics for the given body font at normal weight. (This is not yet configurable - changing the font name or source in the CSS won't change the metrics displayed).</p>
+				<p>Overlaying the heading and/or accent font can be used as a visual guide to assist with making styling adjustments when fonts appear physically larger or smaller than the body font at the same size. Editing the CSS will update the preview, but the changes will not be saved anywhere.</p>
+				<p><strong>Note: </strong>Not all weights are available for all fonts, so you may see a fallback or a browser approximation in those cases. Check the Fonts panel for which weights and styles are loaded.</p>
+				{/* eslint-enable max-len */}
 			</InfoBox>
 
 		</PreviewPanelWrapper>
