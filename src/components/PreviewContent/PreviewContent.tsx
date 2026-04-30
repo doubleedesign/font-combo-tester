@@ -33,9 +33,7 @@ export const PreviewContent: FC<PreviewContentProps> = ({ size, families, weight
 
 	return (
 		<ShadowDomWrapper stylesheetContent={`${tokens}\n${styles}`}>
-			<FontContextProvider>
-				<PreviewContentInner size={size} families={families} weight={weight} showMetrics={showMetrics} zoomLevel={zoomLevel} />
-			</FontContextProvider>
+			<PreviewContentInner size={size} families={families} weight={weight} showMetrics={showMetrics} zoomLevel={zoomLevel} />
 		</ShadowDomWrapper>
 	);
 };
