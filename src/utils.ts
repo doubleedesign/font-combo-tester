@@ -1,3 +1,73 @@
+import { chain } from 'lodash';
+import type { FontAdjustments, FontMetrics } from './types.ts';
+
+export function extractFontFaceDeclarationData(css: string): Record<string, string>[] {
+	let chunkIndex = 0;
+	const chunks = chain(css.split('\n'))
+		.groupBy((line: string | string[]) => {
+			if (line.includes('@font-face')) chunkIndex++;
+
+			return chunkIndex;
+		})
+		.values()
+		.value();
+
+	const cssLines = chunks.map(chunk => chunk.slice(1, -1)).filter(chunk => chunk.length > 1);
+
+	return cssLines.map(chunk => {
+		return chunk.reduce((acc, line) => {
+			const [property, value] = line.split(':').map(part => part.trim());
+			// Skip the src field because we're not using it and excluding it makes it easier to split the other lines
+			if(property === 'src') return acc;
+
+			if (property && value) {
+				//@ts-expect-error TS7053: Element implicitly has an any type because expression of type string can't be used to index type {}
+				acc[property] = value.replace(/;$/, ''); // Remove trailing semicolon
+			}
+
+			return acc;
+		}, {});
+	});
+}
+
+export function updateFontData(originalMetrics: FontMetrics, adjustments: FontAdjustments): FontMetrics {
+	if(!actualAdjustments(adjustments)) return originalMetrics;
+
+	const { baseline, xHeight, capHeight, ascender, descender } = originalMetrics;
+	const { sizeAdjust = 100, ascenderOverride = 0, descenderOverride = 0 } = adjustments;
+
+	// e.g., 120% → 1.2
+	const sizeScale = sizeAdjust / 100;
+
+	// Scale proportional metrics according to the scaled-down size adjustment (e.g., if sizeAdjust is 85%, scale by 0.85)
+	const scaledXHeight   = xHeight   * sizeScale;
+	const scaledCapHeight = capHeight * sizeScale;
+	const scaledAscender  = ascender  * sizeScale;
+	const scaledDescender = descender * sizeScale;
+
+	// TODO: Account for ascender and descender overrides
+
+	return {
+		baseline,
+		xHeight:    scaledXHeight,
+		capHeight:  scaledCapHeight,
+		ascender:   scaledAscender,
+		descender:  scaledDescender
+	};
+}
+
+function actualAdjustments(maybeAdjustments: FontAdjustments): FontAdjustments|null {
+	if(Object.values(maybeAdjustments).every(value => value === undefined)) {
+		return null;
+	}
+
+	if(maybeAdjustments.sizeAdjust === 100 && !maybeAdjustments.ascenderOverride && !maybeAdjustments.descenderOverride) {
+		return null;
+	}
+
+	return maybeAdjustments;
+}
+
 export function tidyCss(css: string): string {
 	// Remove charset declarations
 	const result = css.replace('@charset "UTF-8";', '');

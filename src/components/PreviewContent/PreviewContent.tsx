@@ -2,7 +2,8 @@ import { type FC, useEffect, useMemo, useRef } from 'react';
 import { ShadowDomWrapper } from '../ShadowDomWrapper/ShadowDomWrapper.tsx';
 import { LetterformLine, PreviewContentItem, PreviewContentWrapper, PreviewOverlay } from './PreviewContent.styled';
 import { useCss } from '../../controllers/CssContext/CssContext.tsx';
-import { FontContextProvider, useFontData } from '../../controllers/FontContext/FontContext.tsx';
+import { useFontData } from '../../controllers/FontContext/FontContext.tsx';
+import type { FontMetrics } from '../../types.ts';
 
 type PreviewContentProps = {
 	size: string;
@@ -43,14 +44,21 @@ function PreviewContentInner({ size, families, weight, showMetrics, zoomLevel }:
 	const data = useFontData();
 
 	const positionsFromBottomOfDiv = useMemo(() => {
-		const baselinePos = Math.abs(data.descender ?? 0) + (data.baseline ?? 0);
+		if(!data.metrics) return {};
+		if(Object.keys(data.metrics).length === 0) return {};
+
+		// We probably have proper FontMetrics object at this point, but TypeScript doesn't realise that
+		const metrics = data.metrics as FontMetrics;
+
+		const baselinePos = (Math.abs(metrics.descender ?? 0) + (metrics.baseline ?? 0));
+		const shiftedBaselinePos = baselinePos + (data.baselineShift ?? 0);
 
 		return ({
-			baseline: baselinePos * 10,
-			xHeight: (baselinePos + (data.xHeight ?? 0)) * 10,
-			capHeight: (baselinePos + (data.capHeight ?? 0)) * 10,
-			ascender: (baselinePos + (data.ascender ?? 0)) * 10,
-			descender: 0,
+			baseline: shiftedBaselinePos * 10,
+			xHeight: (shiftedBaselinePos + (metrics.xHeight ?? 0)) * 10,
+			capHeight: (shiftedBaselinePos + (metrics.capHeight ?? 0)) * 10,
+			ascender: (shiftedBaselinePos + (metrics.ascender ?? 0)) * 10,
+			descender: 0 - Math.abs(shiftedBaselinePos - Math.abs(metrics.descender ?? 0)) * 10,
 		});
 	}, [data]);
 
