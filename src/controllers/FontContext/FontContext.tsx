@@ -52,7 +52,7 @@ export const FontContextProvider = ({ children }: { children: ReactNode }) => {
 export function useFontData() {
 	const context = useContext(FontContext);
 	if (!context) {
-		throw new Error('useCss must be used within a <CssProvider>');
+		throw new Error('useFontData must be used within a <FontContextProvider>');
 	}
 
 	return context;
