@@ -21,14 +21,13 @@ export const PreviewContent: FC<PreviewContentProps> = ({ size, families, weight
 		if (!fonts) return;
 
 		// Inject the font-face rules into the document head because they won't work in the shadow DOM
-		const styleEl = document.createElement('style');
-		styleEl.setAttribute('data-custom', 'doubleedesign');
-		styleEl.textContent = fonts;
-		document.head.appendChild(styleEl);
-
-		return () => {
-			document.head.removeChild(styleEl);
-		};
+		let customStyleEl = document.querySelector('style[data-custom="doubleedesign"]');
+		if(!customStyleEl) {
+			customStyleEl = document.createElement('style');
+			customStyleEl.setAttribute('data-custom', 'doubleedesign');
+			document.head.appendChild(customStyleEl);
+		}
+		customStyleEl.textContent = fonts;
 	}, [fonts]);
 
 	return (
