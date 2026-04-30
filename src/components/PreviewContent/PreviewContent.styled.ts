@@ -59,7 +59,7 @@ export const LetterformLine = styled.button<{ $position?: number }>`
     right: 0;
 	bottom: ${props => props.$position ? `${props.$position}%` : '0'};
 	height: 10px; // make them larger for easier hovering
-	transform: translateY(7px);
+	transform: translateY(9px);
 	border: 0;
 	border-top: 1px solid var(--color-info);
     cursor: pointer;
