@@ -18,9 +18,15 @@ export const CodePanelWrapper = styled.div`
 				font-family: inherit;
 				font-size: inherit;
             }
+			
+			textarea,
+			pre {
+				font-size: 1rem !important; // these need to be the same size or else editing doesn't work properly
+			}
 
             pre {
                 height: 100% !important;
+				font-size: 1rem;
             }
         }
     }

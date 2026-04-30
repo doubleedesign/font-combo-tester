@@ -11,7 +11,7 @@ export const PreviewContentItem = styled.div<{ $size: string; $family: string, $
 	font-size: ${props => `var(--font-size-${props.$size})`};
 	font-weight: ${props => `var(--font-weight-${props.$weight})`};
 	position: absolute;
-	top: var(--spacing-xl);
+	top: var(--spacing-lg);
 	left: var(--spacing-xl);
 	right: var(--spacing-xl);
     color: var(--color-body-text);
@@ -26,6 +26,7 @@ export const PreviewContentItem = styled.div<{ $size: string; $family: string, $
 	
 	p {
 		line-height: 1;
+		margin: 0;
 	}
 
     &[data-family="body"] {
@@ -34,7 +35,7 @@ export const PreviewContentItem = styled.div<{ $size: string; $family: string, $
 		top: unset;
 		right: unset;
 		
-        &:not(:only-child) {
+        &:not(:only-of-type) {
 			p {
 				color: var(--color-body-text-muted);
 				opacity: 0.5;
